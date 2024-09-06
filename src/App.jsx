@@ -8,6 +8,7 @@ import { ForgotPass } from './components/Forgotpass';
 import { PasswordReset } from './components/PasswordReset';
 import AptitudeTest from './components/AptitudeTest';
 import ProtectedRoute from './components/ProtectedRoute ';
+import AptitudeTest2 from './components/AptitudeTest2';
 function App() {
 
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/forgotpassword/:id/:token" element={<ForgotPass />} />
           <Route path="/password-reset" element={<PasswordReset />} />
           <Route path="/aptitude" element={<AptitudeTest />} />
+          <Route path="/aptitude2" element={<AptitudeTest2 />} />
          
         </Routes>
       </BrowserRouter>
