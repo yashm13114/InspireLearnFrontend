@@ -39,7 +39,7 @@ const Login = () => {
                 }
     
                 alert("Login successful");
-                navigate('/aptitude'); // Redirect to the dashboard or any other page
+                navigate('/aptitude2'); // Redirect to the dashboard or any other page
             }
         } catch (error) {
             console.error("Error during login:", error);

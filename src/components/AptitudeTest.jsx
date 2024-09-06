@@ -1,153 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-
-// const AptitudeTest = () => {
-//     const navigate = useNavigate();
-//     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-//     const [questions, setQuestions] = useState([]);
-//     const [selectedOptions, setSelectedOptions] = useState([]);
-//     const [loading, setLoading] = useState(true);
-
-//     useEffect(() => {
-//         // Redirect to login if not authenticated
-//         const user = JSON.parse(localStorage.getItem('user'));
-//         if (!user) {
-//             navigate('/login');
-//         }
-
-//         // Fetch questions
-//         const fetchQuestions = async () => {
-//             try {
-//                 const response = await fetch('http://localhost:3000/aptitudeque12');
-//                 if (!response.ok) {
-//                     throw new Error('Network response was not ok');
-//                 }
-//                 const data = await response.json();
-//                 if (Array.isArray(data)) {
-//                     setQuestions(data);
-//                 } else {
-//                     console.error('Unexpected data format:', data);
-//                 }
-//                 setLoading(false);
-//             } catch (error) {
-//                 console.error('Error fetching questions:', error);
-//                 setLoading(false);
-//             }
-//         };
-
-//         fetchQuestions();
-//     }, [navigate]);
-
-//     if (loading) return <div>Loading...</div>;
-
-//     const handleNext = () => {
-//         if (currentQuestionIndex < questions.length - 1) {
-//             setCurrentQuestionIndex(currentQuestionIndex + 1);
-//             setSelectedOptions([]);
-//         }
-//     };
-
-//     const handlePrevious = () => {
-//         if (currentQuestionIndex > 0) {
-//             setCurrentQuestionIndex(currentQuestionIndex - 1);
-//             setSelectedOptions([]);
-//         }
-//     };
-
-//     const handleOptionClick = (optionKey) => {
-//         setSelectedOptions(prevSelectedOptions => {
-//             if (prevSelectedOptions.includes(optionKey)) {
-//                 return prevSelectedOptions.filter(option => option !== optionKey);
-//             } else if (prevSelectedOptions.length < 5) {
-//                 return [...prevSelectedOptions, optionKey];
-//             }
-//             return prevSelectedOptions;
-//         });
-//     };
-
-//     const handleSubmit = () => {
-//         // Get the current question
-//         const currentQuestion = questions[currentQuestionIndex];
-//         if (!currentQuestion) return;
-
-//         // Determine next page based on user selection
-//         const selectedOption = selectedOptions[0]; // Assuming single selection for simplicity
-
-//         if (currentQuestion.questionNumber === 1) {
-//             if (selectedOption === 'g') {
-//                 navigate('/specific-page-for-other'); // Redirect for "Other (Specify)"
-//             } else {
-//                 navigate(`/specific-page-for-${selectedOption}`); // Redirect based on the selected stream
-//             }
-//         } else {
-//             // Handle other questions and navigation logic as needed
-//             console.log('Selected options for current question:', selectedOptions);
-//             // Example: navigate to a summary page or results page
-//             navigate('/summary');
-//         }
-//     };
-
-//     const currentQuestion = questions[currentQuestionIndex];
-
-//     return (
-//         <div className="font-sans bg-gray-100 text-gray-800 min-h-screen flex flex-col">
-//             <main className="flex-grow flex justify-center items-center p-4">
-//                 <div className="bg-white p-8 w-full max-w-4xl rounded-lg shadow-md text-center">
-//                     <h1 className="text-2xl font-bold mb-4">Aptitude Test</h1>
-//                     <div className="bg-gray-300 rounded-full h-5 mb-4">
-//                         <div className="bg-green-600 h-full rounded-full" style={{ width: `${(currentQuestionIndex + 1) / questions.length * 100}%` }}></div>
-//                     </div>
-//                     <div className="mb-4">
-//                         <h2 className="text-xl font-semibold">Question {currentQuestionIndex + 1} of {questions.length}</h2>
-//                         <p className="mt-2">{currentQuestion?.questionText || 'Loading question...'}</p>
-//                     </div>
-//                     <div className="space-y-2 mb-4">
-//                         {currentQuestion && Object.entries(currentQuestion.options).map(([key, value], index) => (
-//                             <button
-//                                 key={index}
-//                                 onClick={() => handleOptionClick(key)}
-//                                 className={`w-full py-2 px-4 border rounded-md ${selectedOptions.includes(key) ? 'bg-green-200 border-green-400' : 'bg-gray-100 hover:bg-gray-200'}`}
-//                                 disabled={!selectedOptions.includes(key) && selectedOptions.length >= 5}
-//                             >
-//                                 {value}
-//                             </button>
-//                         )) || <p>Loading options...</p>}
-//                     </div>
-//                     <div className="flex justify-between">
-//                         <button 
-//                             onClick={handlePrevious} 
-//                             disabled={currentQuestionIndex === 0} 
-//                             className="py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:bg-gray-400"
-//                         >
-//                             Previous
-//                         </button>
-//                         <button 
-//                             onClick={handleNext} 
-//                             disabled={selectedOptions.length === 0 || currentQuestionIndex === questions.length - 1} 
-//                             className="py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:bg-gray-400"
-//                         >
-//                             Next
-//                         </button>
-//                         {currentQuestionIndex === questions.length - 1 && (
-//                             <button 
-//                                 onClick={handleSubmit} 
-//                                 disabled={selectedOptions.length === 0} 
-//                                 className="py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700"
-//                             >
-//                                 Submit
-//                             </button>
-//                         )}
-//                     </div>
-//                 </div>
-//             </main>
-//             <footer className="bg-gray-800 text-white text-center p-4">
-//                 <p>Need help? Contact support at support@example.com</p>
-//             </footer>
-//         </div>
-//     );
-// };
-
-// export default AptitudeTest;
 
 
 // import React, { useState } from 'react';
@@ -155,7 +5,9 @@
 // const AptitudeTest = () => {
 //     const [currentStep, setCurrentStep] = useState(0);
 //     const [userSelections, setUserSelections] = useState({});
-//       const questions = [
+//     const [selectedFields, setSelectedFields] = useState([]);
+    
+//     const questions = [
 //         {
 //             id: 1,
 //             questionText: 'Which of the following general topics do you enjoy or feel drawn to? (Select as many as you like or skip if unsure)',
@@ -215,9 +67,78 @@
 //             },
 //             dependsOn: { id: 4, option: 'f' }
 //         },
-//         // Continue adding specific interest questions for Arts, Science, Business, etc.
+//         // Arts-specific follow-up questions
 //         {
 //             id: 6,
+//             questionText: 'Within Arts and Literature, what specifically interests you?',
+//             options: {
+//                 a: 'Painting/Drawing',
+//                 b: 'Writing/Creative Writing',
+//                 c: 'Music Composition/Performance',
+//                 d: 'Art History/Criticism',
+//                 e: 'Literature Analysis',
+//                 f: "I'm not sure"
+//             },
+//             dependsOn: { id: 1, option: 'b' }
+//         },
+//         // Science-specific follow-up questions
+//         {
+//             id: 7,
+//             questionText: 'Within Science and Engineering, what specifically interests you?',
+//             options: {
+//                 a: 'Physics',
+//                 b: 'Engineering',
+//                 c: 'Biology',
+//                 d: 'Mathematics',
+//                 e: 'Environmental Science',
+//                 f: "I'm not sure"
+//             },
+//             dependsOn: { id: 1, option: 'c' }
+//         },
+//         // Business-specific follow-up questions
+//         {
+//             id: 8,
+//             questionText: 'Within Business and Finance, what specifically interests you?',
+//             options: {
+//                 a: 'Entrepreneurship',
+//                 b: 'Stock Market',
+//                 c: 'Marketing',
+//                 d: 'Financial Planning',
+//                 e: 'Economics',
+//                 f: "I'm not sure"
+//             },
+//             dependsOn: { id: 1, option: 'd' }
+//         },
+//         // Social Sciences-specific follow-up questions
+//         {
+//             id: 9,
+//             questionText: 'Within Social Sciences, what specifically interests you?',
+//             options: {
+//                 a: 'Psychology',
+//                 b: 'Sociology',
+//                 c: 'History',
+//                 d: 'Political Science',
+//                 e: 'Cultural Studies',
+//                 f: "I'm not sure"
+//             },
+//             dependsOn: { id: 1, option: 'e' }
+//         },
+//         // Health and Wellness-specific follow-up questions
+//         {
+//             id: 10,
+//             questionText: 'Within Health and Wellness, what specifically interests you?',
+//             options: {
+//                 a: 'Fitness',
+//                 b: 'Nutrition',
+//                 c: 'Mental Health',
+//                 d: 'Yoga/Meditation',
+//                 e: 'Public Health',
+//                 f: "I'm not sure"
+//             },
+//             dependsOn: { id: 1, option: 'f' }
+//         },
+//         {
+//             id: 11,
 //             questionText: 'Would you prefer resources that are:',
 //             options: {
 //                 a: 'Beginner-friendly',
@@ -227,7 +148,7 @@
 //             }
 //         },
 //         {
-//             id: 7,
+//             id: 12,
 //             questionText: 'How often do you engage with this interest?',
 //             options: {
 //                 a: 'Daily',
@@ -238,7 +159,7 @@
 //             }
 //         },
 //         {
-//             id: 8,
+//             id: 13,
 //             questionText: 'How comfortable do you feel when discussing or reading about [chosen topic]?',
 //             options: {
 //                 a: 'Very comfortable—I can easily follow and contribute to conversations.',
@@ -248,7 +169,7 @@
 //             }
 //         },
 //         {
-//             id: 9,
+//             id: 14,
 //             questionText: 'How often do you seek out information or updates related to [chosen topic]?',
 //             options: {
 //                 a: 'Regularly—I keep up with the latest news and developments.',
@@ -258,7 +179,7 @@
 //             }
 //         },
 //         {
-//             id: 10,
+//             id: 15,
 //             questionText: 'When you encounter a problem or challenge related to [chosen topic], how do you typically respond?',
 //             options: {
 //                 a: 'I can usually solve it on my own or with minimal help.',
@@ -268,7 +189,7 @@
 //             }
 //         },
 //         {
-//             id: 11,
+//             id: 16,
 //             questionText: 'If you were asked to explain a concept within [chosen topic] to someone else, how confident would you feel?',
 //             options: {
 //                 a: 'Very confident—I could explain it clearly and accurately.',
@@ -278,7 +199,7 @@
 //             }
 //         },
 //         {
-//             id: 12,
+//             id: 17,
 //             questionText: 'Have you ever completed any projects, assignments, or activities related to [chosen topic]?',
 //             options: {
 //                 a: 'Yes, and they were successful.',
@@ -290,10 +211,17 @@
 //     ];
 
 //     const handleSelection = (questionId, option) => {
-//         setUserSelections({
-//             ...userSelections,
-//             [questionId]: option
-//         });
+//         if (questionId === 1) {
+//             // Handle multiple selections for the first question
+//             const newSelections = { ...userSelections, [questionId]: [...(userSelections[questionId] || []), option] };
+//             setUserSelections(newSelections);
+//             setSelectedFields([...new Set([...selectedFields, option])]);
+//         } else {
+//             setUserSelections({
+//                 ...userSelections,
+//                 [questionId]: option
+//             });
+//         }
         
 //         // Move to the next step
 //         if (questions[currentStep + 1]) {
@@ -324,7 +252,7 @@
 //         // Skip dependent questions if condition isn't met
 //         if (currentQuestion.dependsOn) {
 //             const { id, option } = currentQuestion.dependsOn;
-//             if (userSelections[id] !== option) {
+//             if (!userSelections[id]?.includes(option)) {
 //                 // Skip this question and move to the next one
 //                 if (questions[currentStep + 1]) {
 //                     setCurrentStep(currentStep + 1);
@@ -365,29 +293,30 @@
 //     };
 
 //     return (
-//         <div className="p-6">
-//             <h1 className="text-3xl mb-6">Aptitude Test</h1>
+//         <div className="p-4 max-w-lg mx-auto">
 //             {renderQuestion()}
 //             <div className="flex justify-between mt-4">
 //                 {currentStep > 0 && (
-//                     <button 
-//                         className="bg-gray-500 text-white py-2 px-4 rounded-md" 
+//                     <button
+//                         className="p-2 bg-gray-300 hover:bg-gray-400 rounded-md"
 //                         onClick={handlePrevious}
 //                     >
 //                         Previous
 //                     </button>
 //                 )}
-//                 {currentStep < questions.length - 1 ? (
-//                     <button 
-//                         className="bg-blue-500 text-white py-2 px-4 rounded-md" 
+//                 {currentStep < questions.length - 1 && (
+//                     <button
+//                         className={`p-2 bg-blue-500 text-white rounded-md ${!userSelections[questions[currentStep].id] ? 'cursor-not-allowed opacity-50' : ''}`}
 //                         onClick={handleNext}
+//                         disabled={!userSelections[questions[currentStep].id]}
 //                     >
 //                         Next
 //                     </button>
-//                 ) : (
-//                     <button 
-//                         className="bg-green-500 text-white py-2 px-4 rounded-md" 
-//                         onClick={() => alert('Test submitted')}
+//                 )}
+//                 {currentStep === questions.length - 1 && (
+//                     <button
+//                         className="p-2 bg-green-500 text-white rounded-md"
+//                         onClick={() => alert('Test submitted!')}
 //                     >
 //                         Submit Test
 //                     </button>
@@ -398,15 +327,16 @@
 // };
 
 // export default AptitudeTest;
-
-
 import React, { useState } from 'react';
 
 const AptitudeTest = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const [userSelections, setUserSelections] = useState({});
     const [selectedFields, setSelectedFields] = useState([]);
-    
+    const [showVideos, setShowVideos] = useState(false);
+    const [difficultyLevel, setDifficultyLevel] = useState(null);
+
+     
     const questions = [
         {
             id: 1,
@@ -610,9 +540,42 @@ const AptitudeTest = () => {
         }
     ];
 
+    const courses = {
+        Technology: {
+            beginner: {
+                'Consumer Electronics': 'https://www.youtube.com/watch?v=r-X9coYTOV4&list=PLah6faXAgguOeMUIxS22ZU4w5nDvCl5gs',
+                'Internet of Things (IoT)': 'https://www.youtube.com/watch?v=LlhmzVL5bm8&list=PL9ooVrP1hQOGccfBbP5tJWZ1hv5sIUWJl'
+            },
+            intermediate: {
+                'Consumer Electronics': 'https://www.youtube.com/results?search_query=introduction+to+consumer+electronics+for+intermidiate',
+                'Internet of Things (IoT)': 'https://www.youtube.com/watch?v=Ic63-yf-zuc&list=PL3uLubnzL2Tm5PAw88N1jR9MLTJpuPEnX'
+            },
+            advanced: {
+                'Python': 'https://www.youtube.com/watch?v=KSiRzuSx120&list=PL7yh-TELLS1FuqLSjl5bgiQIEH25VEmIc',
+                'React': 'https://www.youtube.com/watch?v=4p_VWn1AEvg&list=PLjxZxD6BDkeZoRU6v7gMyQ7BirGD6u0Lt'
+            }
+        },
+        Arts: {
+            beginner: {
+                'Music Theory': 'https://www.coursera.org/learn/edinburgh-music-theory',
+                'Visual Arts': 'https://www.jerrysartarama.com/free-art-instruction-videos/skill-level',
+                'Creative Writing': 'https://www.coursera.org/learn/english-composition'
+            },
+            intermediate: {
+                'Music Theory': 'https://www.coursera.org/learn/music-theory-harmonic-practices',
+                'Visual Arts': 'https://www.udemy.com/course/complete-drawing-course/',
+                'Creative Writing': 'https://www.coursera.org/learn/write-your-first-novel'
+            },
+            advanced: {
+                'Music Composition': 'https://www.coursera.org/learn/composing-music',
+                'Visual Arts': 'https://visualartspassage.com/illustration/process-skill-and-craft/',
+                'Advanced Writing': 'https://www.coursera.org/learn/advanced-writing'
+            }
+        }
+    };
+
     const handleSelection = (questionId, option) => {
         if (questionId === 1) {
-            // Handle multiple selections for the first question
             const newSelections = { ...userSelections, [questionId]: [...(userSelections[questionId] || []), option] };
             setUserSelections(newSelections);
             setSelectedFields([...new Set([...selectedFields, option])]);
@@ -622,8 +585,11 @@ const AptitudeTest = () => {
                 [questionId]: option
             });
         }
-        
-        // Move to the next step
+
+        if (questionId === 11) {
+            setDifficultyLevel(option); // Track difficulty level
+        }
+
         if (questions[currentStep + 1]) {
             setCurrentStep(currentStep + 1);
         }
@@ -641,29 +607,67 @@ const AptitudeTest = () => {
         }
     };
 
+    const handleSubmit = () => {
+        setShowVideos(true);
+    };
+
+    const renderVideos = () => {
+        if (!difficultyLevel) return null;
+
+        const level = difficultyLevel === 'a' ? 'beginner' : difficultyLevel === 'b' ? 'intermediate' : 'advanced';
+        return (
+            <div className='bg-gray-300'>
+                <h2 className="text-xl mt-4">Recommended Courses for {level.charAt(0).toUpperCase() + level.slice(1)} Level</h2>
+                {selectedFields.includes('a') && (
+                    <div>
+                        <h3 className="mt-4">Technology</h3>
+                        <ul>
+                            {Object.entries(courses.Technology[level]).map(([topic, url]) => (
+                                <li key={topic}>
+                                    <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+                                        {topic}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+                {selectedFields.includes('b') && (
+                    <div>
+                        <h3 className="mt-4">Arts and Literature</h3>
+                        <ul>
+                            {Object.entries(courses.Arts[level]).map(([topic, url]) => (
+                                <li key={topic}>
+                                    <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+                                        {topic}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            </div>
+        );
+    };
+
     const renderQuestion = () => {
         const currentQuestion = questions[currentStep];
-    
-        // Ensure currentQuestion is defined
-        if (!currentQuestion) {
-            return <div>Loading...</div>;
-        }
-    
-        // Skip dependent questions if condition isn't met
+
+        if (!currentQuestion) return <div>Loading...</div>;
+
         if (currentQuestion.dependsOn) {
             const { id, option } = currentQuestion.dependsOn;
             if (!userSelections[id]?.includes(option)) {
-                // Skip this question and move to the next one
                 if (questions[currentStep + 1]) {
                     setCurrentStep(currentStep + 1);
                 }
                 return null;
             }
         }
-    
+
         if (currentQuestion.type === 'text') {
             return (
-                <div>
+                <div className=''>
                     <h2 className="text-xl mb-4">{currentQuestion.questionText}</h2>
                     <textarea
                         className="block w-full p-2 bg-gray-200 rounded-md"
@@ -675,7 +679,7 @@ const AptitudeTest = () => {
         }
 
         return (
-            <div>
+            <div className=' p-10'>
                 <h2 className="text-xl mb-4">{currentQuestion.questionText}</h2>
                 <div className="space-y-2">
                     {Object.entries(currentQuestion.options).map(([key, value]) => (
@@ -694,36 +698,40 @@ const AptitudeTest = () => {
 
     return (
         <div className="p-4 max-w-lg mx-auto">
-            {renderQuestion()}
-            <div className="flex justify-between mt-4">
-                {currentStep > 0 && (
-                    <button
-                        className="p-2 bg-gray-300 hover:bg-gray-400 rounded-md"
-                        onClick={handlePrevious}
-                    >
-                        Previous
-                    </button>
-                )}
-                {currentStep < questions.length - 1 && (
-                    <button
-                        className={`p-2 bg-blue-500 text-white rounded-md ${!userSelections[questions[currentStep].id] ? 'cursor-not-allowed opacity-50' : ''}`}
-                        onClick={handleNext}
-                        disabled={!userSelections[questions[currentStep].id]}
-                    >
-                        Next
-                    </button>
-                )}
-                {currentStep === questions.length - 1 && (
-                    <button
-                        className="p-2 bg-green-500 text-white rounded-md"
-                        onClick={() => alert('Test submitted!')}
-                    >
-                        Submit Test
-                    </button>
-                )}
-            </div>
+            {showVideos ? (
+                renderVideos()
+            ) : (
+                <>
+                    {renderQuestion()}
+                    <div className="flex justify-between mt-4">
+                        {currentStep > 0 && (
+                            <button
+                                className="p-2 bg-gray-300 hover:bg-gray-400 rounded-md"
+                                onClick={handlePrevious}
+                            >
+                                Previous
+                            </button>
+                        )}
+                        {currentStep < questions.length - 1 ? (
+                            <button
+                                className={`p-2 bg-blue-500 text-white rounded-md ${!userSelections[questions[currentStep].id] ? 'cursor-not-allowed opacity-50' : ''}`}
+                                onClick={handleNext}
+                                disabled={!userSelections[questions[currentStep].id]}
+                            >
+                                Next
+                            </button>
+                        ) : (
+                            <button
+                                className="p-2 bg-green-500 text-white rounded-md"
+                                onClick={handleSubmit}
+                            >
+                                Submit Test
+                            </button>
+                        )}
+                    </div>
+                </>
+            )}
         </div>
     );
 };
-
-export default AptitudeTest;
+export default AptitudeTest
