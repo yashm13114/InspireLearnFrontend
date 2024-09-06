@@ -13,7 +13,7 @@ export const ForgotPass = () => {
     const [message, setMessage] = useState("");
 
     const userValid = async () => {
-        const res = await fetch(`http://localhost:3000/auth/forgotpassword/${id}/${token}`, {
+        const res = await fetch(`https://meciabackend.onrender.com/auth/forgotpassword/${id}/${token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -45,7 +45,7 @@ export const ForgotPass = () => {
             toast.error("Password must be at least 8 characters!");
         } else {
             try {
-                const res = await fetch(`http://localhost:3000/auth/${id}/${token}`, {
+                const res = await fetch(`https://meciabackend.onrender.com/auth/${id}/${token}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

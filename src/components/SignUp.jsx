@@ -32,7 +32,7 @@ const SignUp = () => {
 
         try {
             setLoading(true);
-            const res = await fetch('http://localhost:3000/auth/signup', {
+            const res = await fetch('https://meciabackend.onrender.com/auth/signup', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

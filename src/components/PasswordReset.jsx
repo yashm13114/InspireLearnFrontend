@@ -18,7 +18,7 @@ export const PasswordReset = () => {
             toast.warning("Please include '@' in your email!", { position: "top-center" });
         } else {
             try {
-                const res = await fetch("http://localhost:3000/auth/sendpasswordlink", {
+                const res = await fetch("https://meciabackend.onrender.com/auth/sendpasswordlink", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
